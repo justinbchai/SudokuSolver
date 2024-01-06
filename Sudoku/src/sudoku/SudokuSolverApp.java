@@ -3,7 +3,7 @@ package sudoku;
 public class SudokuSolverApp {
 
 	public static void main(String[] args) {
-		SudokuBoard sudokuBoard = new SudokuBoard("masterpuzzle.txt");
+		SudokuBoard sudokuBoard = new SudokuBoard("backtrackChallenge.txt");
 		System.out.println(sudokuBoard);
 		long startTime = System.currentTimeMillis();
 		if (SudokuSolver.solveSudoku(sudokuBoard)) {
