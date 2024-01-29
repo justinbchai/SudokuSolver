@@ -2,6 +2,7 @@ package sudoku;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SudokuBoard {
@@ -60,5 +61,32 @@ public class SudokuBoard {
 			str.append("\n");
 		}
 		return str.toString().trim();
+	}
+	
+	public static SudokuBoard generateBoard(int numClues) {
+		// randomly seed 9 cells 1-9
+		int[][] board = new int[9][9];
+		Random random = new Random();
+		for (int i = 1; i <= 9; i++) {
+			int[] cell = randomCell(random);
+			int row = cell[0], col = cell[1];
+			if (board[row][col] != 0) {
+				i--;
+				break;
+			}
+			board[row][col] = i;
+		}
+		SudokuBoard sudokuBoard = new SudokuBoard(board);
+		SudokuSolver.solveSudoku(sudokuBoard);
+		return sudokuBoard;
+	}
+
+	
+	public static int[] randomCell(Random random) {
+		int[] arr = new int[2];
+		int cell = random.nextInt(81);
+		arr[0] = cell / 9;
+		arr[1] = cell % 9;
+		return arr;
 	}
 }
